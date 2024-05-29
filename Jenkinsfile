@@ -1,5 +1,7 @@
 pipeline {
-  agent { dockerfile true }
+   triggers {
+        githubPush()
+    }
   stages {
     stage('Test') {
       steps {
