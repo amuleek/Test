@@ -1,20 +1,31 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven 3.6.3' // Ensure Maven is configured in Jenkins
-        
-    }
+
     stages {
-        stage('Build') {
+        stage ('Compile Stage') {
+
             steps {
-                echo 'Building Maven project for QA'
-                sh 'mvn clean install'
+                withMaven(maven : 'maven3.6.3') {
+                    sh 'mvn clean compile'
+                }
             }
         }
-        stage('Test') {
+
+        stage ('Testing Stage') {
+
             steps {
-                echo 'Running tests for QA'
-                sh 'mvn test'
+                withMaven(maven : 'maven3.6.3') {
+                    sh 'mvn test'
+                }
+            }
+        }
+
+
+        stage ('Deployment Stage') {
+            steps {
+                withMaven(maven : 'maven3.6.3') {
+                    sh 'mvn deploy'
+                }
             }
         }
     }
