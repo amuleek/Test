@@ -1,4 +1,11 @@
 pipeline {
-agents any 
-}
+    agent any
 
+    stages {
+        stage ('Compile Stage') {
+
+            steps {
+              sh ""
+                }
+            }
+        }
