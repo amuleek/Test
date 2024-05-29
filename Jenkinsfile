@@ -17,5 +17,4 @@ pipeline {
                 sh 'mvn deploy'
             }
         }
-    }
-}
+    
