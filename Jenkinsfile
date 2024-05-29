@@ -1,21 +1,14 @@
 pipeline {
-    agent any
-    tools {
-        maven 'Maven 3.6.3' // Ensure Maven is configured in Jenkins
-      
+  agent { dockerfile true }
+  stages {
+    stage('Test') {
+      steps {
+        sh '''
+          node --version
+          git --version
+          curl --version
+        '''
+      }
     }
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building Maven project for Development'
-                sh 'mvn clean install'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Running tests for Development'
-                sh 'mvn test'
-            }
-        }
-    }
+  }
 }
